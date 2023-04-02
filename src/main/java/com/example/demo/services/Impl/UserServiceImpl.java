@@ -1,9 +1,13 @@
 package com.example.demo.services.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -77,6 +81,25 @@ public class UserServiceImpl implements UserService {
 	public List<UserDto> getAllUsers(int page, int limit) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		UserEntity userEntity=userRepository.findByemail(email);
+		
+		if(userEntity==null) throw new RuntimeException(email);
+		
+		return new User(userEntity.getEmail(),userEntity.getEncryptedPassword(), new ArrayList<>());
+	}
+	@Override
+	public UserDto getUser(String email) {
+		// TODO Auto-generated method stub
+		UserEntity userEntity=userRepository.findByemail(email);
+		if(userEntity==null) throw new RuntimeException("User Not Exist");
+
+		UserDto dto=new UserDto();
+		BeanUtils.copyProperties(userEntity, dto);
+		return dto;
 	}
 	
 
