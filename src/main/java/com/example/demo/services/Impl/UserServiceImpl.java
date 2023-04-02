@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.UserEntity;
@@ -19,7 +20,8 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	@Autowired
 	Utils utils;
-	 
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	//BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Override
 	public UserDto createuser(UserDto user) {
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity =new UserEntity();
 		BeanUtils.copyProperties(user, userEntity);
 		
-		userEntity.setEncryptedPassword("ejdhbchbfurfrbf");
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userEntity.setUserId(utils.generateStringId(32));
 		
 		UserEntity newUser= userRepository.save(userEntity);

@@ -12,8 +12,8 @@ public class ProjwebServiceApplication {
 		SpringApplication.run(ProjwebServiceApplication.class, args);
 	}
 	
-/*	@Bean
+	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
-	}*/
+	}
 }
