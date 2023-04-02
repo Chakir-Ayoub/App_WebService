@@ -39,7 +39,8 @@ public class WebSecurity extends AbstractHttpConfigurer<WebSecurity, HttpSecurit
 		    .requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
 		    .permitAll() 
 			.anyRequest().authenticated() 
-			.and().addFilter(getAuthenticationFilter(authenticationManagerBuilder));
+			.and().addFilter(getAuthenticationFilter(authenticationManagerBuilder))
+			.addFilter(new AuthorizationFilter(authenticationManagerBuilder.getObject()));
 	        return http.build();
 	    }
 	    protected AuthenticationFilter getAuthenticationFilter(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
