@@ -5,6 +5,7 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,12 +63,14 @@ public class usercontroller {
 	public ResponseEntity<UserReponse> save(@RequestBody @Valid UserRequest userRequest) throws Exception {
 		if (userRequest.getFirstName().isEmpty()) throw new UserException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 		
-		UserDto userdo=new UserDto();
-		BeanUtils.copyProperties(userRequest, userdo);
+		//UserDto userdo=new UserDto();
+		//BeanUtils.copyProperties(userRequest, userdo);
+		ModelMapper modelMapper = new ModelMapper();
+		UserDto userdo= modelMapper.map(userRequest, UserDto.class);
 		//Couche service
 		UserDto createuser= userService.createuser(userdo);
-		UserReponse userReponse=new UserReponse();
-		BeanUtils.copyProperties(createuser, userReponse);
+		UserReponse userReponse=modelMapper.map(createuser, UserReponse.class);
+
 		
 		return new ResponseEntity<UserReponse>(userReponse,HttpStatus.ACCEPTED);
 	}

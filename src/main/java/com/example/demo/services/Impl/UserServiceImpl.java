@@ -3,6 +3,7 @@ package com.example.demo.services.Impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -33,8 +34,10 @@ public class UserServiceImpl implements UserService {
 		UserEntity usercheck=userRepository.findByemail(user.getEmail());
 		if(usercheck!=null) throw new RuntimeException("User Already Exist");
 		
-		UserEntity userEntity =new UserEntity();
-		BeanUtils.copyProperties(user, userEntity);
+		
+		
+		ModelMapper modelMapper=new ModelMapper();
+		UserEntity userEntity =modelMapper.map(user, UserEntity.class);
 		
 		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userEntity.setUserId(utils.generateStringId(32));

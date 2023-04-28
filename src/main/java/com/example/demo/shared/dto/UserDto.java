@@ -2,6 +2,10 @@ package com.example.demo.shared.dto;
 
 import java.io.Serializable;
 
+import java.util.*;
+
+import com.example.demo.entity.AdressesEntity;
+
 public class UserDto implements Serializable {
 
 	/**
@@ -17,6 +21,15 @@ public class UserDto implements Serializable {
 	private String encryptedPassword;
 	private String emailVerificationToken;
 	private Boolean emailVerificationStatus=false;
+	
+	private List<AdressesEntity> addresses;
+	
+	public List<AdressesEntity> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AdressesEntity> addresses) {
+		this.addresses = addresses;
+	}
 	public Long getId() {
 		return Id;
 	}
@@ -74,5 +87,6 @@ public class UserDto implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	
 }

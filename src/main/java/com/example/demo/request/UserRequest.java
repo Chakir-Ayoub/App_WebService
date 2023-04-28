@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import java.util.*;
 
 public class UserRequest {
 	@NotBlank(message = "Ce champs ne doit pas etre Null !")
@@ -21,6 +22,10 @@ public class UserRequest {
 	@Size(max = 12,message = "Ce champs doit avoir au max 12 Caracteres !")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",message = "Ce chmps doit avoid des lettres en Maj et Minsc et Numero ")
 	private String password;
+	
+	private List<AdresseRequest> adresses;
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -44,6 +49,12 @@ public class UserRequest {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<AdresseRequest> getAdresses() {
+		return adresses;
+	}
+	public void setAdresses(List<AdresseRequest> adresses) {
+		this.adresses = adresses;
 	}
 	
 	
