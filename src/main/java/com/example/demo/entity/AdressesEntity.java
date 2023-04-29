@@ -18,7 +18,7 @@ public class AdressesEntity implements Serializable  {
 	@GeneratedValue
 	private Long id;
 	@Column(length = 30,nullable = false)
-	private String AddressId;
+	private String addressId;
 	@Column(length = 20,nullable = false)
 	private String city;
 	@Column(length = 20,nullable = false)
@@ -38,11 +38,12 @@ public class AdressesEntity implements Serializable  {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getAddressId() {
-		return AddressId;
+		return addressId;
 	}
 	public void setAddressId(String addressId) {
-		AddressId = addressId;
+		this.addressId = addressId;
 	}
 	public String getCity() {
 		return city;

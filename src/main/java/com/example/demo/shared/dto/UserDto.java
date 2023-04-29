@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import java.util.*;
 
-import com.example.demo.entity.AdressesEntity;
 
 public class UserDto implements Serializable {
 
@@ -22,13 +21,13 @@ public class UserDto implements Serializable {
 	private String emailVerificationToken;
 	private Boolean emailVerificationStatus=false;
 	
-	private List<AdressesEntity> addresses;
+	private List<AddressDto> adresses;
 	
-	public List<AdressesEntity> getAddresses() {
-		return addresses;
+	public List<AddressDto> getAdresses() {
+		return adresses;
 	}
-	public void setAddresses(List<AdressesEntity> addresses) {
-		this.addresses = addresses;
+	public void setAdresses(List<AddressDto> adresses) {
+		this.adresses = adresses;
 	}
 	public Long getId() {
 		return Id;
@@ -87,6 +86,7 @@ public class UserDto implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 
 	
 }

@@ -1,10 +1,13 @@
 package com.example.demo.reponse;
 
+import java.util.List;
+
 public class UserReponse {
 	private String UserId;
 	private String firstName;
 	private String lastName;
 	private String email;
+	private List<AdresseRespnse> adresses;
 	public String getUserId() {
 		return UserId;
 	}
@@ -28,6 +31,12 @@ public class UserReponse {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public List<AdresseRespnse> getAdresses() {
+		return adresses;
+	}
+	public void setAdresses(List<AdresseRespnse> adresses) {
+		this.adresses = adresses;
 	}
 	
 	

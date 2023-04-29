@@ -3,10 +3,12 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import com.example.demo.shared.dto.AddressDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
-@Entity
+@Entity()
 public class UserEntity implements Serializable {
 
 
@@ -33,15 +35,9 @@ public class UserEntity implements Serializable {
 	private Boolean emailVerificationStatus=false;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-	private List<AdressesEntity> addresess;
+	private List<AdressesEntity> adresses;
 	public Long getId() {
 		return Id;
-	}
-	public List<AdressesEntity> getAddresess() {
-		return addresess;
-	}
-	public void setAddresess(List<AdressesEntity> addresess) {
-		this.addresess = addresess;
 	}
 	public void setId(Long id) {
 		Id = id;
@@ -89,21 +85,15 @@ public class UserEntity implements Serializable {
 	public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
 	}
-	public UserEntity(String userId, String firstName, String lastName, String email, String encryptedPassword,
-			String emailVerificationToken, Boolean emailVerificationStatus) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.encryptedPassword = encryptedPassword;
-		this.emailVerificationToken = emailVerificationToken;
-		this.emailVerificationStatus = emailVerificationStatus;
+
+	public List<AdressesEntity> getAdresses() {
+		return adresses;
 	}
-	public UserEntity() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setAdresses(List<AdressesEntity> adresses) {
+		this.adresses = adresses;
 	}
+	
+	
 	
 	
 	

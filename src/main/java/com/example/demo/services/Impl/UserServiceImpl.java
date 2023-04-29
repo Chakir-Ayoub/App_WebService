@@ -16,6 +16,7 @@ import com.example.demo.entity.UserEntity;
 import com.example.demo.repositorys.UserRepository;
 import com.example.demo.services.UserService;
 import com.example.demo.shared.Utils;
+import com.example.demo.shared.dto.AddressDto;
 import com.example.demo.shared.dto.UserDto;
 
 @Service
@@ -34,7 +35,13 @@ public class UserServiceImpl implements UserService {
 		UserEntity usercheck=userRepository.findByemail(user.getEmail());
 		if(usercheck!=null) throw new RuntimeException("User Already Exist");
 		
-		
+		for(int i=0;i<user.getAdresses().size();i++) {
+				AddressDto address= user.getAdresses().get(i);
+				address.setUser(user);
+				address.setAddressId(utils.generateStringId(30));
+				//address.setAdresseId(utils.generateStringId(32));
+				user.getAdresses().set(i, address);
+		}
 		
 		ModelMapper modelMapper=new ModelMapper();
 		UserEntity userEntity =modelMapper.map(user, UserEntity.class);
@@ -43,9 +50,8 @@ public class UserServiceImpl implements UserService {
 		userEntity.setUserId(utils.generateStringId(32));
 		
 		UserEntity newUser= userRepository.save(userEntity);
-		UserDto userDto=new UserDto(); 
 		
-		BeanUtils.copyProperties(newUser, userDto);
+		UserDto userDto=modelMapper.map(newUser, UserDto.class);
 		
 		return userDto;
 	}

@@ -63,8 +63,6 @@ public class usercontroller {
 	public ResponseEntity<UserReponse> save(@RequestBody @Valid UserRequest userRequest) throws Exception {
 		if (userRequest.getFirstName().isEmpty()) throw new UserException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 		
-		//UserDto userdo=new UserDto();
-		//BeanUtils.copyProperties(userRequest, userdo);
 		ModelMapper modelMapper = new ModelMapper();
 		UserDto userdo= modelMapper.map(userRequest, UserDto.class);
 		//Couche service
@@ -73,6 +71,7 @@ public class usercontroller {
 
 		
 		return new ResponseEntity<UserReponse>(userReponse,HttpStatus.ACCEPTED);
+		
 	}
 	
 	@PutMapping(path = "/{id}",

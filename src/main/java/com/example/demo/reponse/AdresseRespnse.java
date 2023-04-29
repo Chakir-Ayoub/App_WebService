@@ -1,29 +1,17 @@
-package com.example.demo.shared.dto;
+package com.example.demo.reponse;
 
-
-public class AddressDto {
-	private Long id;
+public class AdresseRespnse {
 	private String AddressId;
 	private String city;
 	private String country;
 	private String street;
 	private String postal;
 	private String type;
-	private UserDto user;
-	
-	
-	
 	public String getAddressId() {
 		return AddressId;
 	}
 	public void setAddressId(String addressId) {
 		AddressId = addressId;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public String getCity() {
 		return city;
@@ -54,12 +42,6 @@ public class AddressDto {
 	}
 	public void setType(String type) {
 		this.type = type;
-	}
-	public UserDto getUser() {
-		return user;
-	}
-	public void setUser(UserDto user) {
-		this.user = user;
 	}
 	
 	

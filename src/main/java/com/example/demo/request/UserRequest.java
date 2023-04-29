@@ -26,6 +26,13 @@ public class UserRequest {
 	private List<AdresseRequest> adresses;
 	
 	
+	public List<AdresseRequest> getAdresses() {
+		return adresses;
+	}
+	public void setAdresses(List<AdresseRequest> adresses) {
+		this.adresses = adresses;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -49,12 +56,6 @@ public class UserRequest {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public List<AdresseRequest> getAdresses() {
-		return adresses;
-	}
-	public void setAdresses(List<AdresseRequest> adresses) {
-		this.adresses = adresses;
 	}
 	
 	
