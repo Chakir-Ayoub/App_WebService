@@ -25,9 +25,16 @@ public class UserRequest {
 	
 	private List<AdresseRequest> adresses;
 	
+	private ContactRequest contact;
 	
 	public List<AdresseRequest> getAdresses() {
 		return adresses;
+	}
+	public ContactRequest getContact() {
+		return contact;
+	}
+	public void setContact(ContactRequest contact) {
+		this.contact = contact;
 	}
 	public void setAdresses(List<AdresseRequest> adresses) {
 		this.adresses = adresses;

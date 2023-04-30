@@ -1,11 +1,16 @@
 package com.example.demo.services.Impl;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,15 +44,19 @@ public class UserServiceImpl implements UserService {
 				AddressDto address= user.getAdresses().get(i);
 				address.setUser(user);
 				address.setAddressId(utils.generateStringId(30));
-				//address.setAdresseId(utils.generateStringId(32));
 				user.getAdresses().set(i, address);
 		}
+		
+		user.getContact().setContactId(utils.generateStringId(30));
+		user.getContact().setUser(user);
 		
 		ModelMapper modelMapper=new ModelMapper();
 		UserEntity userEntity =modelMapper.map(user, UserEntity.class);
 		
 		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userEntity.setUserId(utils.generateStringId(32));
+		
+		
 		
 		UserEntity newUser= userRepository.save(userEntity);
 		
@@ -87,9 +96,36 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	@Override
-	public List<UserDto> getAllUsers(int page, int limit) {
+	public List<UserDto> getAllUsers(int page, int limit,String search,int status) {
 		// TODO Auto-generated method stub
-		return null;
+		/*if(page>0) page=page-1;
+		
+		List<UserDto> userDto=new ArrayList<>();
+		
+		PageRequest pageableRequest = PageRequest.of(page,limit);*/
+		List<UserEntity> userEntities;
+		if(search.isEmpty()) {
+			userEntities=userRepository.findAllUsers();
+		}
+		else
+		{
+			 userEntities=userRepository.findAllCriteria(search,status);
+
+		}
+		
+		//List<UserEntity> userEntities =userpage.getContent();
+		List<UserDto> userDto=new ArrayList<>();
+
+		for (UserEntity userEntity : userEntities) {
+			
+			ModelMapper modelMapper=new ModelMapper();
+			//UserDto user=mapper.map(userEntity, Dto.class);
+			UserDto Dto=modelMapper.map(userEntity, UserDto.class);
+			
+			userDto.add(Dto);
+			
+		}
+		return userDto;
 	}
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

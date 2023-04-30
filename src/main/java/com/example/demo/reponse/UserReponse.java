@@ -2,12 +2,17 @@ package com.example.demo.reponse;
 
 import java.util.List;
 
+import com.example.demo.shared.dto.AddressDto;
+import com.example.demo.shared.dto.ContactDto;
+
 public class UserReponse {
 	private String UserId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private List<AdresseRespnse> adresses;
+	private ContactResponse contact;
+
 	public String getUserId() {
 		return UserId;
 	}
@@ -38,6 +43,13 @@ public class UserReponse {
 	public void setAdresses(List<AdresseRespnse> adresses) {
 		this.adresses = adresses;
 	}
+	public ContactResponse getContact() {
+		return contact;
+	}
+	public void setContact(ContactResponse contact) {
+		this.contact = contact;
+	}
 	
+
 	
 }

@@ -5,6 +5,7 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,17 @@ public class usercontroller {
 		return new ResponseEntity<UserReponse>(reponse,HttpStatus.ACCEPTED);
 	}
 	
-	public List<UserReponse> GetAllUsers(@RequestParam(value = "page") int page,@RequestParam(value = "limit") int limit){
+	@GetMapping
+	public List<UserReponse> GetAllUsers(@RequestParam(value = "page",defaultValue = "4") int page,@RequestParam(value = "limit",defaultValue = "4") int limit ,@RequestParam(value = "search",defaultValue = "") String search,@RequestParam(value = "status",defaultValue = "1") int status){
 		List<UserReponse> userReponses=new ArrayList<>();
 		
-		List<UserDto> users=userService.getAllUsers(page,limit);
+		List<UserDto> users=userService.getAllUsers(page,limit,search,status);
 		
 		for(UserDto userdto: users) {
-			UserReponse user=new UserReponse();
-			BeanUtils.copyProperties(userdto, user);
+			//UserReponse user=new UserReponse();
+		//	BeanUtils.copyProperties(userdto, user);
+			ModelMapper modelMapper=new ModelMapper();
+			UserReponse user=modelMapper.map(userdto, UserReponse.class);
 			
 			userReponses.add(user);
 		}

@@ -1,14 +1,14 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
-
-import com.example.demo.shared.dto.AddressDto;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
-@Entity()
+@Entity(name = "user")
 public class UserEntity implements Serializable {
 
 
@@ -36,8 +36,27 @@ public class UserEntity implements Serializable {
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	private List<AdressesEntity> adresses;
+	
+	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+	private ContactEntity contact;
+	
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "userEntities" )
+	private Set<GroupEntity> groups=new HashSet<>();
+	
+	public ContactEntity getContact() {
+		return contact;
+	}
+	public void setContact(ContactEntity contact) {
+		this.contact = contact;
+	}
 	public Long getId() {
 		return Id;
+	}
+	public Set<GroupEntity> getGroups() {
+		return groups;
+	}
+	public void setGroups(Set<GroupEntity> groups) {
+		this.groups = groups;
 	}
 	public void setId(Long id) {
 		Id = id;

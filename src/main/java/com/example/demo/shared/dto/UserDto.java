@@ -20,9 +20,15 @@ public class UserDto implements Serializable {
 	private String encryptedPassword;
 	private String emailVerificationToken;
 	private Boolean emailVerificationStatus=false;
-	
 	private List<AddressDto> adresses;
+	private ContactDto contact;
 	
+	public ContactDto getContact() {
+		return contact;
+	}
+	public void setContact(ContactDto contact) {
+		this.contact = contact;
+	}
 	public List<AddressDto> getAdresses() {
 		return adresses;
 	}
