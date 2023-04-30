@@ -28,7 +28,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	/*@Query(value = "SELECT * FROM user u where (u.first_name=?1 OR u.last_name=?1) AND u.email_verification_status=?2 ",nativeQuery = true)
 	List<UserEntity> findAllCriteria(String search ,int status);*/
 	
+	//Methode 2
+	/*@Query(value = "SELECT * FROM user u where (u.first_name= :search OR u.last_name= :search) AND u.email_verification_status= :status ",nativeQuery = true)
+	List<UserEntity> findAllCriteria(@Param("search") String search ,@Param("status") int status);*/
 	
-	@Query(value = "SELECT * FROM user u where (u.first_name= :search OR u.last_name= :search) AND u.email_verification_status= :status ",nativeQuery = true)
+	@Query(value = "SELECT * FROM user u where (u.first_name LIKE %:search% OR u.last_name LIKE %:search%) AND u.email_verification_status= :status ",nativeQuery = true)
 	List<UserEntity> findAllCriteria(@Param("search") String search ,@Param("status") int status);
 }
