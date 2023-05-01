@@ -34,9 +34,18 @@ public class UserEntity implements Serializable {
 	@Column(nullable = false)
 	private Boolean emailVerificationStatus=false;
 	
+	@Column(nullable = false)
+	private Boolean admin;
+	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	private List<AdressesEntity> adresses;
 	
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
 	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private ContactEntity contact;
 	

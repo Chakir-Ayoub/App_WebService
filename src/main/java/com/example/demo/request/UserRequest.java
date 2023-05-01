@@ -22,6 +22,7 @@ public class UserRequest {
 	@Size(max = 12,message = "Ce champs doit avoir au max 12 Caracteres !")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",message = "Ce chmps doit avoid des lettres en Maj et Minsc et Numero ")
 	private String password;
+	private Boolean admin;
 	
 	private List<AdresseRequest> adresses;
 	
@@ -63,6 +64,12 @@ public class UserRequest {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 	
 	

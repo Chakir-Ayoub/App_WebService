@@ -10,9 +10,16 @@ public class UserReponse {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private Boolean admin;
 	private List<AdresseRespnse> adresses;
 	private ContactResponse contact;
 
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
 	public String getUserId() {
 		return UserId;
 	}

@@ -20,6 +20,7 @@ public class UserDto implements Serializable {
 	private String encryptedPassword;
 	private String emailVerificationToken;
 	private Boolean emailVerificationStatus=false;
+	private Boolean admin;
 	private List<AddressDto> adresses;
 	private ContactDto contact;
 	
@@ -91,6 +92,12 @@ public class UserDto implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 
 
