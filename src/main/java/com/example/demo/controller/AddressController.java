@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +54,27 @@ public class AddressController {
 		AdresseRespnse newAddress=modelMapper.map(createAddress, AdresseRespnse.class);
 		
 		return new ResponseEntity<AdresseRespnse>(newAddress,HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<AdresseRespnse> getOneAddresse(@PathVariable(name = "id") String addresseId){
+		AddressDto addressDto=addresseService.getAddress(addresseId);
+		
+		ModelMapper modelMapper=new ModelMapper();
+		
+		AdresseRespnse adresseRespnse=modelMapper.map(addressDto, AdresseRespnse.class);
+		
+		return new ResponseEntity<AdresseRespnse>(adresseRespnse,HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<String> updateAddresse(@PathVariable(name = "id") String addresseId,@RequestBody AdresseRequest adresseRequest){
+		return new ResponseEntity<>("Update addresses",HttpStatus.ACCEPTED);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> deleteAddresse(@PathVariable(name = "id") String addressId){
+		addresseService.deleteAddress(addressId);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

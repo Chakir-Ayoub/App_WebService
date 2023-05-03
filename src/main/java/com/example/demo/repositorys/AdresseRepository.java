@@ -11,4 +11,5 @@ import com.example.demo.entity.UserEntity;
 @Repository
 public interface AdresseRepository extends CrudRepository<AdressesEntity, Long> {
 	List<AdressesEntity> findByUser(UserEntity currentUser);
+	AdressesEntity findByaddressId(String id);
 }

@@ -1,6 +1,6 @@
 package com.example.demo.request;
 
-
+import com.example.demo.entity.UserEntity;
 
 public class AdresseRequest {
 	
