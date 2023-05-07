@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.demo.SpringApplicationContext;
 import com.example.demo.request.UserLoginRequest;
@@ -76,6 +77,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	        res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
 	        res.addHeader("user_id", userDto.getUserId());
 	        
-	        res.getWriter().write("{\"token\":\""+token+"\",\"id\":\""+userDto.getUserId());
+	        res.getWriter().write("{\"token\":\""+token+"\",\"id\":\""+userDto.getUserId()+"\"}");
 	    }  
 }
